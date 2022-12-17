@@ -19,20 +19,25 @@ def ingest_trip():
     df = pd.read_csv(trip_file)
     cursor = conn.cursor()
     for index, row in df.iterrows():
-        print(f"index: {index}, row: {row}")
-        print(f"this is row datasource: {row['datasource']}")
-        cursor.execute(f"INSERT INTO TRIPS VALUES ('{row['region']}','{row['origin_coord']}','{row['destination_coord']}','{row['datetime']}','{row['datasource']}');")
+        cursor.execute(f"""\
+        INSERT INTO TRIPS VALUES 
+        ('{row['region']}','{row['origin_coord']}','{row['destination_coord']}','{row['datetime']}','{row['datasource']}');
+        """)
     conn.commit()
     cursor.close()
-    return f'index: {index}, row {row}',201
+    return f'Data succesfully ingested',201
 
-# TODO: consider migrating to Fast API which is more robust
+@app.route('/num_trips_area', methods=['GET'])
+def get_wk_trips_area():
+    return 'WIP', 200
+
+# TODO: handle errors
 # TODO: check database persistency
-# TODO: data model
+# TODO: data model pydantic
 # TODO: use alembic for database version and schema evolution
 # TODO: encapsulate functions
 # TODO: test these functins
-# TODO: black formatter
+# TODO: consider migrating to Fast API which is more robust
 
 # partition keys: similar origin, destin, time of day
 # https://stackoverflow.com/questions/37689554/postgres-partition-by-character-prefix
