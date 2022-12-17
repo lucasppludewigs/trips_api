@@ -4,7 +4,7 @@
 
 Run the flask python API:
 
-`export FLASK_APP=app.py`
+`export FLASK_APP=app.py`  
 `flask run`
 
 Send a command to ingest data
