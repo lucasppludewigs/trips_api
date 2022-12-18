@@ -9,6 +9,9 @@ Initialize the database:
 docker pull postgres
 docker run -p 5432:5432 --name trip-postgres -e POSTGRES_PASSWORD=postgres -d postgres
 docker exec -it trip-postgres psql -U postgres
+
+# create table and its index to group trips with similar information:
+
 create table trips (
  region varchar(100),
  origin_coord varchar(200),
@@ -16,6 +19,8 @@ create table trips (
  datetime timestamp,
  datasource varchar(100)
 );
+
+create index trip_idx on trips (origin_coord, destination_coord, cast(datetime as time));
 ```
 
 To be able to install psycopg2, we need postgres: `brew install postgresql`
@@ -40,3 +45,7 @@ curl -XGET http://localhost:5000/trips -H "Content-Type: application/json" -d '{
 
 curl -XGET http://localhost:5000/trips -H "Content-Type: application/json" -d '{"coordinates":{"lat_low": 14.33, "lat_high": 14.59, "long_low": 50.04, "long_high": 50.11}}'
 ```
+
+Answers to the query questions can be found at respective folder.
+
+Regarding scalability, the API took 90 seconds to ingest 100K rows of data.

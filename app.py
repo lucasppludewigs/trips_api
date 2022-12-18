@@ -16,8 +16,11 @@ def hello_world():
 def ingest_trip():
     # Considering that the data will be received as CSV
     trip_file = request.form['trip_file']
-    ingest_trip_logic(trip_file, conn)
-    return f'Data succesfully ingested',201
+    try:
+        ingest_trip_logic(trip_file, conn)
+        return f'Data succesfully ingested',201
+    except:
+        return jsonify({'error':'There was an error consuming your data, see example in README'}), 400
 
 
 @app.route('/trips', methods=['GET'])
@@ -49,7 +52,3 @@ def get_week_trips_area():
 # TODO: consider migrating to Fast API which is more robust
 # TODO: convert prints to proper logging
 # TODO: containerize API
-
-# TODO: partition keys: similar origin, destin, time of day
-# https://stackoverflow.com/questions/37689554/postgres-partition-by-character-prefix
-# maybe just using an index is easier
