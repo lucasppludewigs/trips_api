@@ -30,5 +30,13 @@ Run the flask python API:
 Send a command to ingest data
 
 ```bash
-curl -XPOST http://localhost:5000/ingest -d "trip_file=trips.csv"
+curl -XPOST http://localhost:5000/trips -d "trip_file=trips.csv"
+```
+
+Send a command to get weekly data based on region or coordinates:
+
+```bash
+curl -XGET http://localhost:5000/trips -H "Content-Type: application/json" -d '{"region":"Hamburg"}'  
+
+curl -XGET http://localhost:5000/trips -H "Content-Type: application/json" -d '{"coordinates":{"lat_low": 14.33, "lat_high": 14.59, "long_low": 50.04, "long_high": 50.11}}'
 ```
