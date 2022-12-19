@@ -4,7 +4,7 @@ The problem statement of this challenge can be found in the pdf file.
 
 ## Usage
 
-Initialize the database:  
+Initialize the database. In a terminal:  
 ```
 docker pull postgres
 docker run -p 5432:5432 --name trip-postgres -e POSTGRES_PASSWORD=postgres -d postgres
@@ -25,6 +25,7 @@ create index trip_idx on trips (origin_coord, destination_coord, cast(datetime a
 
 To be able to install psycopg2, we need postgres: `brew install postgresql`
 
+Git clone the project repository, create a python virtual environment  
 Install the dependencies on requirements.txt: `pip install requirements.txt`
 
 Run the flask python API:
@@ -49,3 +50,5 @@ curl -XGET http://localhost:5000/trips -H "Content-Type: application/json" -d '{
 Answers to the query questions can be found at respective folder.
 
 Regarding scalability, the API took 90 seconds to ingest 100K rows of data.
+
+How to setup this project in a cloud provider: see the png image in the repository.
