@@ -10,7 +10,7 @@ docker pull postgres
 docker run -p 5432:5432 --name trip-postgres -e POSTGRES_PASSWORD=postgres -d postgres
 docker exec -it trip-postgres psql -U postgres
 
-# create table and its index to group trips with similar information:
+# on postgres prompt, create table and its index to group trips with similar information:
 
 create table trips (
  region varchar(100),
@@ -25,15 +25,19 @@ create index trip_idx on trips (origin_coord, destination_coord, cast(datetime a
 
 To be able to install psycopg2, we need postgres: `brew install postgresql`
 
-Git clone the project repository, create a python virtual environment  
-Install the dependencies on requirements.txt: `pip install requirements.txt`
+Git clone the project repository, create a python virtual environment:  
+```
+python3 -m venv .venv
+source .venv/bin/activate
+```
+Install the dependencies on requirements.txt: `pip install -r requirements.txt`
 
 Run the flask python API:
 
 `export FLASK_APP=app.py`  
 `flask run`
 
-Send a command to ingest data
+In another terminal, send a command to ingest data
 
 ```bash
 curl -XPOST http://localhost:5000/trips -d "trip_file=trips.csv"
