@@ -9,9 +9,10 @@ Initialize the database. In a terminal:
 docker pull postgres
 docker run -p 5432:5432 --name trip-postgres -e POSTGRES_PASSWORD=postgres -d postgres
 docker exec -it trip-postgres psql -U postgres
+```
+on postgres prompt, create table and its index to group trips with similar information:
 
-# on postgres prompt, create table and its index to group trips with similar information:
-
+```
 create table trips (
  region varchar(100),
  origin_coord varchar(200),
