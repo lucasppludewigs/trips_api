@@ -35,8 +35,10 @@ Install the dependencies on requirements.txt: `pip install -r requirements.txt`
 
 Run the flask python API:
 
-`export FLASK_APP=app.py`  
-`flask run`
+```
+export FLASK_APP=app.py  
+flask run
+```
 
 In another terminal, send a command to ingest data
 
