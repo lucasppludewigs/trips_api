@@ -43,12 +43,10 @@ def get_week_trips_area():
     response_dict['result'] = result
     return response_dict, 200
 
-# TODO: handle errors: invalid csv path, invalid schema
-# TODO: sqlalchemy instead psycopg2?
-# TODO: check database persistency
-# TODO: data model pydantic
+# TODO: consider using sqlalchemy instead psycopg2
+# TODO: use pydantic for data model
 # TODO: use alembic for database version and schema evolution
-# TODO: test encapsulated functins
+# TODO: create tests for functions
 # TODO: consider migrating to Fast API which is more robust
 # TODO: convert prints to proper logging
 # TODO: containerize API
